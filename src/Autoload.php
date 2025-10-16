@@ -1,7 +1,7 @@
 <?php
 declare(strict_types = 1);
 
-pest()->preset('r2h', fn (): array => [
+pest()->presets()->custom('r2h', fn (): array => [
     // Controllers should not extend any base controller.
     expect('App\Http\Controllers')->toExtendNothing(),
 

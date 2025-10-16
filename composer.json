@@ -1,0 +1,36 @@
+{
+    "name": "r2h/pest-arch-preset",
+    "description": "Our solution to keep our Laravel platforms maintainable.",
+    "type": "pest-plugin",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "R2H\\PestArchPreset\\": "src/"
+        },
+        "files": [
+            "src/Autoload.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Michael Snoeren",
+            "email": "michael@r2h.nl"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require-dev": {
+        "pestphp/pest-dev-tools": "^4"
+    },
+    "config": {
+        "sort-packages": true,
+        "preferred-install": "dist",
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "require": {
+        "php": "^8.3",
+        "pestphp/pest": "^4",
+        "pestphp/pest-plugin": "^4"
+    }
+}

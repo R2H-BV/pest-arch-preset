@@ -49,4 +49,7 @@ pest()->presets()->custom('r2h', fn (): array => [
     expect('App\Observers')
         ->toBeClasses()
         ->toHaveSuffix('Observer'),
+
+    // The `config`-function should not be used. The facade should.
+    expect('config')->not->toBeUsed(),
 ]);

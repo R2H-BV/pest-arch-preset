@@ -62,7 +62,7 @@ pest()->presets()->custom('r2h', fn (): array => [
         ->toBeClasses()
         ->toExtend('Illuminate\Mail\Mailable')
         ->toImplement('Illuminate\Contracts\Queue\ShouldQueue')
-        ->toHaveSuffix('Mailable'),
+        ->toHaveSuffix('Mail'),
 
     // Custom casts must have a suffix.
     expect('App\Casts')

@@ -15,7 +15,8 @@ pest()->presets()->custom('r2h', fn (): array => [
     // Notifications should be queueable at any time.
     expect('App\Notifications')
         ->toBeClasses()
-        ->toImplement('Illuminate\Contracts\Queue\ShouldQueue'),
+        ->toImplement('Illuminate\Contracts\Queue\ShouldQueue')
+        ->toHaveSuffix('Notification'),
 
     // Listeners must have a suffix and a handle method.
     expect('App\Listeners')
@@ -32,15 +33,12 @@ pest()->presets()->custom('r2h', fn (): array => [
     // Jobs must have a suffix.
     expect('App\Jobs')
         ->toBeClasses()
-        ->toHaveSuffix('Job'),
+        ->toImplement('Illuminate\Contracts\Queue\ShouldQueue')
+        ->toHaveSuffix('Job')
+        ->toHaveMethod('handle'),
 
     // Any contracts must be an interface.
     expect('App\Contracts')->toBeInterfaces(),
-
-    // Data classes must have a suffix.
-    expect('App\Data')
-        ->toBeClasses()
-        ->toHaveSuffix('Data'),
 
     // Enums must be enums.
     expect('App\Enums')->toBeEnums(),
@@ -50,6 +48,57 @@ pest()->presets()->custom('r2h', fn (): array => [
         ->toBeClasses()
         ->toHaveSuffix('Observer'),
 
+    // Concerns must be traits.
+    expect('App\Concerns')->toBeTraits(),
+
+    // The exceptions must have a suffix.
+    expect('App\Exceptions')
+        ->toBeClasses()
+        ->toExtend('Throwable')
+        ->toHaveSuffix('Exception'),
+
+    // The mailables must have a suffix.
+    expect('App\Mail')
+        ->toBeClasses()
+        ->toExtend('Illuminate\Mail\Mailable')
+        ->toImplement('Illuminate\Contracts\Queue\ShouldQueue')
+        ->toHaveSuffix('Mailable'),
+
+    // Custom casts must have a suffix.
+    expect('App\Casts')
+        ->toBeClasses()
+        ->toImplement('Illuminate\Contracts\Database\Eloquent\CastsAttributes')
+        ->toHaveSuffix('Cast'),
+
     // The `config`-function should not be used. The facade should.
     expect('config')->not->toBeUsed(),
+
+    // Any debug functions should not be used.
+    expect([
+        'dd',
+        'ddd',
+        'dump',
+        'env',
+        'exit',
+        'ray',
+    ])->not->toBeUsed(),
+
+    /**
+     * Spatie Event Sourcing
+     */
+    // The aggregates must have a suffix.
+    expect('App\Aggregates')
+        ->toBeClasses()
+        ->toExtend('Spatie\EventSourcing\AggregateRoots\AggregateRoot')
+        ->toHaveSuffix('Aggregate'),
+    // The projectors must have a suffix.
+    expect('App\Projectors')
+        ->toBeClasses()
+        ->toExtend('Spatie\EventSourcing\EventHandlers\Projectors\Projector')
+        ->toHaveSuffix('Projector'),
+    // The reactors must have a suffix.
+    expect('App\Reactors')
+        ->toBeClasses()
+        ->toExtend('Spatie\EventSourcing\EventHandlers\Reactors\Reactor')
+        ->toHaveSuffix('Reactor'),
 ]);

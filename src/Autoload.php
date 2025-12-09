@@ -35,7 +35,8 @@ pest()->presets()->custom('r2h', fn (): array => [
         ->toBeClasses()
         ->toImplement('Illuminate\Contracts\Queue\ShouldQueue')
         ->toHaveSuffix('Job')
-        ->toHaveMethod('handle'),
+        ->toHaveMethod('handle')
+        ->ignoring('App\Jobs\Middleware'),
 
     // Any contracts must be an interface.
     expect('App\Contracts')->toBeInterfaces(),

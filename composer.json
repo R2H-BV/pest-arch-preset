@@ -19,7 +19,7 @@
     ],
     "minimum-stability": "stable",
     "require-dev": {
-        "pestphp/pest-dev-tools": "^4"
+        "pestphp/pest-dev-tools": "^4|^5"
     },
     "config": {
         "sort-packages": true,

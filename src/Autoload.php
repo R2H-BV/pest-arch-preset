@@ -34,9 +34,11 @@ pest()->presets()->custom('r2h', fn (): array => [
     expect('App\Jobs')
         ->toBeClasses()
         ->toImplement('Illuminate\Contracts\Queue\ShouldQueue')
+        ->ignoring('App\Jobs\Middleware')
         ->toHaveSuffix('Job')
-        ->toHaveMethod('handle'),
-
+        ->ignoring('App\Jobs\Middleware')
+        ->toHaveMethod('handle')
+        ->ignoring('App\Jobs\Middleware'),
     // Any contracts must be an interface.
     expect('App\Contracts')->toBeInterfaces(),
 
@@ -62,7 +64,7 @@ pest()->presets()->custom('r2h', fn (): array => [
         ->toBeClasses()
         ->toExtend('Illuminate\Mail\Mailable')
         ->toImplement('Illuminate\Contracts\Queue\ShouldQueue')
-        ->toHaveSuffix('Mailable'),
+        ->toHaveSuffix('Mail'),
 
     // Custom casts must have a suffix.
     expect('App\Casts')
